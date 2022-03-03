@@ -1,0 +1,100 @@
+
+{{titulo}}
+
+<mat-dialog-content>
+    <div class="modal-form">
+    <form [formGroup]="estudianteForm.baseForm">
+    
+        
+        
+        <mat-form-field class="full-width-input" >
+            <input [readonly]="isModify"
+            formControlName="Carnet"
+            matInput
+            placeholder="Carnet"
+            required
+            />
+        </mat-form-field>
+
+
+        <div formGroupName="IdPersonaNavigation">
+
+            <mat-form-field class="full-width-input">
+        
+                <mat-select formControlName="TipoId" name="TipoId" placeholder="Tipo Identificación"  [disabled]="isModify">
+                    <mat-option value="1">Física</mat-option>
+                    <mat-option value="2">Juridica</mat-option>
+                    <mat-option value="3">DIMEX</mat-option>
+                    <mat-option value="4">NITE</mat-option>
+                  </mat-select>
+              </mat-form-field>
+
+         
+            
+            <mat-form-field class="full-width-input">
+                <input  [readonly]="isModify"
+                formControlName="Identificacion"
+                matInput
+                placeholder="Identificación"
+                required
+                />
+            </mat-form-field>
+    
+            <mat-form-field class="full-width-input">
+                <input
+                formControlName="Nombre"
+                matInput
+                placeholder="Nombre"
+                required
+                />
+            </mat-form-field>
+    
+            <mat-form-field class="full-width-input">
+                <input
+                formControlName="Apellido1"
+                matInput
+                placeholder="Primer Apellido"
+                required
+                />
+            </mat-form-field>
+    
+            <mat-form-field class="full-width-input">
+                <input
+                formControlName="Apellido2"
+                matInput
+                placeholder="Segundo Apellido"
+                required
+                />
+            </mat-form-field>
+        </div>       
+
+        <mat-form-field class="full-width-input">            
+            <mat-select formControlName="IdGrupo" name="Grupos" placeholder="Grupo" required>
+              <mat-option *ngFor="let grupo of listaGrupos" [value]="grupo.Id">
+                {{grupo.Nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="full-width-input">            
+            <mat-select formControlName="IdHorario" name="Horario" placeholder="Horario" required>
+              <mat-option *ngFor="let horario of listaHorario" [value]="horario.Id">
+                {{horario.Horario}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>    
+    </form>
+    </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button
+    mat-raised-button
+    [mat-dialog-close]="true"
+    color="primary"
+    (click)="onSave()"
+    ckdFocusInitial
+    [disabled]="!estudianteForm.baseForm.valid">
+    Guardar
+    </button>
+    </mat-dialog-actions>
